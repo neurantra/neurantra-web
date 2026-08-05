@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/surgery-care/privacy`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/surgery-care/terms`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/surgery-care/communication`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/surgery-care/delete-account`, changeFrequency: "yearly", priority: 0.2 },
   ];
 }
