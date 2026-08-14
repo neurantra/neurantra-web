@@ -140,6 +140,24 @@ export default function SurgeryCarePrivacyPage() {
                   Google push-notification services
                 </li>
                 <li>
+                  With <span className="font-medium text-foreground">Microsoft Azure OpenAI Service</span>,
+                  which generates the in-app assistant&rsquo;s answers. When you ask the assistant a
+                  question, we send that question together with limited context about your care &mdash; your
+                  procedure, surgery date, how many days into recovery you are, your age and sex, your
+                  diagnosis, your medications, and any notes your care team has added. We do{" "}
+                  <span className="font-medium text-foreground">not</span> send your name, email address,
+                  phone number, address, the messages between you and your care team, or anything from Apple
+                  Health. Microsoft processes this on our behalf under a HIPAA Business Associate Agreement,
+                  does not use it to train its models, and may not use it for any purpose of its own. The app
+                  asks your permission before any of this is sent, and you can withdraw that permission at
+                  any time in Settings &mdash; the rest of the app works exactly the same either way.
+                </li>
+                <li>
+                  The same AI service also helps your care team draft replies to the messages you send them.
+                  A person at your practice reviews and approves every draft before you receive it, and the
+                  same contractual protections apply.
+                </li>
+                <li>
                   When required by law or valid legal process, or to protect the rights, property, or safety
                   of patients, practices, Neurantra, or others
                 </li>
