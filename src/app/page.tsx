@@ -29,10 +29,9 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Surgery Care",
-    tagline: "The patient companion app surgical practices use to stay connected — secure messaging, appointments, an educational assistant, and recovery tracking.",
+    tagline: "The patient companion app surgical practices use to stay connected — human-reviewed messages, post-op instructions, an educational assistant, and recovery tracking.",
     domain: "Healthcare · patient app",
-    status: "Beta",
-    statusLabel: "Coming soon",
+    status: "Live",
     url: "/surgery-care",
     internal: true,
     logo: "/surgery-care/surgery-care-logo.png",
@@ -47,8 +46,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "PlaneSane",
-    tagline: "Choose the best flight, not just the cheapest — reliability, weather, connection, and fare risk scored from years of US flight data.",
-    domain: "Travel · consumer",
+    tagline: "Choose the best flight — and now the best hotel — not just the cheapest. Reliability, weather, connection, and fare risk from years of flight data; hotels scored by StaySane.",
+    domain: "Travel · flights & hotels",
     status: "Live",
     url: "/planesane",
     internal: true,
@@ -56,7 +55,7 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Puzzlecub",
-    tagline: "Six AI-driven games in one app — Math, Word, Sand, Alpha, Maze, and Geo — adapting to how you play.",
+    tagline: "Seven AI-driven games in one app — Math, Word, Sand, Alpha, Maze, Geo, and Stack — adapting to how you play.",
     domain: "Games · all ages",
     status: "Live",
     url: "/puzzlecub",
@@ -71,6 +70,35 @@ const PRODUCTS: Product[] = [
     url: "/chaturang",
     internal: true,
     logo: "/chaturang/chaturang-logo.png",
+  },
+];
+
+// The three or four most recent shipping milestones. Newest first; prune the tail
+// rather than letting this grow into a changelog.
+const LATEST = [
+  {
+    when: "August 2026",
+    product: "Surgery Care",
+    href: "/surgery-care",
+    headline: "Live on the App Store and Google Play.",
+    body:
+      "Out of beta and running in a surgical practice today — with the ninety-day course of care, procedure-specific post-op instructions, and the Atlas assistant, every practice reply reviewed by a person before a patient sees it.",
+  },
+  {
+    when: "August 2026",
+    product: "PlaneSane",
+    href: "/planesane",
+    headline: "Hotels, scored the way flights are.",
+    body:
+      "StaySane is the lodging half — a 0-100 risk score built from what guests actually complain about, how the location really works, and whether the rate is fair for that city. Thin evidence is withheld, not guessed.",
+  },
+  {
+    when: "July 2026",
+    product: "Puzzlecub",
+    href: "/puzzlecub",
+    headline: "A seventh game: Stack Quest.",
+    body:
+      "Tap two numbers and the answer they make to drop a puck into the tube, and stack them faster than the beaker fills. It joins the Daily Challenge rotation alongside the other six.",
   },
 ];
 
@@ -153,6 +181,37 @@ export default function Home() {
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-muted">{p.body}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Latest ── */}
+      <section id="latest" className="border-b border-line">
+        <div className="mx-auto max-w-6xl px-6 py-20 sm:px-10 sm:py-24">
+          <p className="mb-10 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">
+            Latest
+          </p>
+          <div className="grid gap-x-12 gap-y-12 sm:grid-cols-3">
+            {LATEST.map(item => (
+              <Link
+                key={`${item.product}-${item.headline}`}
+                href={item.href}
+                className="group block border-t border-line pt-8"
+              >
+                <div className="flex flex-wrap items-baseline gap-x-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                    {item.product}
+                  </p>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
+                    {item.when}
+                  </p>
+                </div>
+                <h3 className="mt-3 text-[21px] font-semibold leading-snug tracking-tight text-foreground">
+                  {item.headline}
+                </h3>
+                <p className="mt-4 text-[15px] leading-relaxed text-muted">{item.body}</p>
+              </Link>
             ))}
           </div>
         </div>

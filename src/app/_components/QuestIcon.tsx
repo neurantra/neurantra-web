@@ -1,4 +1,4 @@
-type QuestName = "math" | "word" | "tide" | "alpha" | "geo" | "maze";
+type QuestName = "math" | "word" | "tide" | "alpha" | "geo" | "maze" | "stack";
 
 interface QuestVisual {
   color: string;
@@ -37,6 +37,11 @@ const VISUALS: Record<QuestName, QuestVisual> = {
     glyph: <MazeGlyph />,
     glyphScale: 0.64,
   },
+  stack: {
+    color: "#14B8A6",
+    glyph: <StackGlyph />,
+    glyphScale: 0.62,
+  },
 };
 
 function WaveGlyph() {
@@ -72,6 +77,29 @@ function GlobeGlyph() {
       <circle cx="50" cy="50" r="40" />
       <ellipse cx="50" cy="50" rx="18" ry="40" />
       <line x1="10" y1="50" x2="90" y2="50" />
+    </svg>
+  );
+}
+
+// Three pucks stacked inside a tube — the same mark the app uses for StackQuest.
+function StackGlyph() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      width="62%"
+      height="62%"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <g stroke="white" strokeOpacity={0.55} strokeWidth={8} strokeLinecap="round">
+        <line x1="8" y1="6" x2="8" y2="94" />
+        <line x1="92" y1="6" x2="92" y2="94" />
+        <line x1="8" y1="96" x2="92" y2="96" strokeOpacity={0.55} />
+      </g>
+      <g fill="white">
+        <rect x="27" y="40" width="46" height="14" rx="7" />
+        <rect x="27" y="59" width="46" height="14" rx="7" />
+        <rect x="27" y="78" width="46" height="14" rx="7" />
+      </g>
     </svg>
   );
 }

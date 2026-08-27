@@ -7,17 +7,17 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { AD_SLOTS } from "@/lib/ads";
 
 export const metadata: Metadata = {
-  title: "Puzzlecub — six AI-driven games in one app",
+  title: "Puzzlecub — seven AI-driven games in one app",
   description:
-    "Puzzlecub is a single app with six AI-driven games — Math, Word, Sand, Alpha, Maze, and Geo — bound together by a shared wallet, daily streak, and an AI that adapts to how you play. Live on iOS and Android. A Neurantra app.",
+    "Puzzlecub is a single app with seven AI-driven games — Math, Word, Sand, Alpha, Maze, Geo, and Stack — bound together by a shared wallet, daily streak, and an AI that adapts to how you play. Live on iOS and Android. A Neurantra app.",
   alternates: { canonical: "/puzzlecub" },
   openGraph: {
     type: "website",
     siteName: "Neurantra",
     url: "https://neurantra.com/puzzlecub",
-    title: "Puzzlecub — six AI-driven games in one app",
+    title: "Puzzlecub — seven AI-driven games in one app",
     description:
-      "Math, Word, Sand, Alpha, Maze, and Geo — bound by a shared wallet, a daily streak, and an AI that adapts to how you play. Live on iOS and Android.",
+      "Math, Word, Sand, Alpha, Maze, Geo, and Stack — bound by a shared wallet, a daily streak, and an AI that adapts to how you play. Live on iOS and Android.",
     locale: "en_US",
   },
 };
@@ -26,7 +26,7 @@ const PUZZLECUB_SITE = "https://puzzlecub.com";
 const PUZZLECUB_APP_STORE = "https://apps.apple.com/us/app/questiverse/id6768766852";
 const PUZZLECUB_PLAY_STORE = "https://play.google.com/store/apps/details?id=com.sumquest.app";
 
-type QuestKey = "math" | "word" | "tide" | "alpha" | "maze" | "geo";
+type QuestKey = "math" | "word" | "tide" | "alpha" | "maze" | "geo" | "stack";
 
 interface Quest {
   key: QuestKey;
@@ -98,6 +98,15 @@ const QUESTS: Quest[] = [
     screenshot: "/puzzlecub/puzzlecub-geo.png",
     screenshotAlt: "Geo Quest — Oceania region intro card with tray pieces",
   },
+  {
+    key: "stack",
+    name: "Stack Quest",
+    tagline: "Stack the pucks, beat the water.",
+    body:
+      "The newest quest. A beaker fills while you play: tap two numbers on the grid, then the answer pill they make, and a puck drops into the tube. Solve fast enough and the stack outruns the rising water. Each round runs on one operation you pick at setup — division gets its own two-pool board with clean reverse-times-table answers. Spend coins on a Slow Fill power-up, or a hint that lights the cells that solve.",
+    skills: "Arithmetic fluency · pattern spotting · working under pressure",
+    screenshot: null,
+  },
 ];
 
 export default function PuzzlecubPage() {
@@ -123,11 +132,11 @@ export default function PuzzlecubPage() {
               </span>
             </div>
             <h1 className="text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-[60px]">
-              Six quests.<br />One Puzzlecub.
+              Seven quests.<br />One Puzzlecub.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              Puzzlecub is a single app, six games — Math, Word, Sand, Alpha,
-              Maze, and Geo — bound together by a shared wallet, a daily
+              Puzzlecub is a single app, seven games — Math, Word, Sand, Alpha,
+              Maze, Geo, and Stack — bound together by a shared wallet, a daily
               streak, a Daily Challenge, and an AI that adapts to how you play.
               Built for everyone. Live now on the App Store and Google Play.
             </p>
@@ -211,11 +220,11 @@ export default function PuzzlecubPage() {
         </div>
       </section>
 
-      {/* ── The six quests ── */}
+      {/* ── The seven quests ── */}
       <section className="border-b border-line">
         <div className="mx-auto max-w-6xl px-6 py-20 sm:px-10 sm:py-24">
           <p className="mb-12 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">
-            The six quests
+            The seven quests
           </p>
           <div className="space-y-24">
             {QUESTS.map((q, i) => {
@@ -298,10 +307,11 @@ export default function PuzzlecubPage() {
             Get Puzzlecub
           </p>
           <h2 className="max-w-2xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
-            Six games, one cub. Free, ad-supported, no account required.
+            Seven games, one cub. Free, ad-supported, no account required.
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
-            Puzzlecub is live now on iOS and Android. Tap a store below to
+            Puzzlecub is live now on iOS and Android — seven games, the newest
+            being Stack Quest. Tap a store below to
             download — or drop us a note if you have feedback once you&rsquo;ve
             played.
           </p>
