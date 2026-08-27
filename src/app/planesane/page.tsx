@@ -8,7 +8,7 @@ import { AD_SLOTS } from "@/lib/ads";
 export const metadata: Metadata = {
   title: "PlaneSane — Choose the best flight and the best hotel, not just the cheapest",
   description:
-    "PlaneSane scores flights on real on-time performance, weather risk, connection safety, and fare quality — and, through StaySane, scores hotels on whether a stay will actually work out. A Neurantra product. Advisory only; no booking.",
+    "PlaneSane scores flights on real on-time performance, weather risk, connection safety, and fare quality — and, through StaySane, scores hotels on whether a stay will actually work out. Free on the web and on iOS and Android. A Neurantra product. Advisory only; no booking.",
   alternates: { canonical: "/planesane" },
   openGraph: {
     type: "website",
@@ -16,13 +16,17 @@ export const metadata: Metadata = {
     url: "https://neurantra.com/planesane",
     title: "PlaneSane — Choose the best flight and the best hotel, not just the cheapest",
     description:
-      "Flight reliability scores from real on-time, weather, and connection data — plus StaySane hotel risk scores. A Neurantra product.",
+      "Flight reliability scores from real on-time, weather, and connection data — plus StaySane hotel risk scores. Free on the web, iOS, and Android. A Neurantra product.",
     locale: "en_US",
   },
 };
 
 const PLANESANE_SITE = "https://planesane.com";
 const STAYSANE_PAGE = "https://planesane.com/staysane";
+const PLANESANE_APP_STORE =
+  "https://apps.apple.com/us/app/planesane-best-flight-finder/id6778518658";
+const PLANESANE_PLAY_STORE =
+  "https://play.google.com/store/apps/details?id=com.planesane.app";
 const DESTINATIONS_PAGE = "https://planesane.com/destinations";
 
 interface Factor {
@@ -97,18 +101,40 @@ const STAY_FACTORS: Factor[] = [
 ];
 
 export default function PlaneSanePage() {
-  // schema.org for the product page — a free WebApplication built by Neurantra.
+  // schema.org for the product page — PlaneSane ships as a free web app and a free
+  // mobile app, so they are declared as two nodes rather than one blurred together.
+  const publisher = {
+    "@type": "Organization",
+    name: "Neurantra LLC",
+    url: "https://neurantra.com",
+  };
+  const freeOffer = { "@type": "Offer", price: "0", priceCurrency: "USD" };
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "PlaneSane",
-    url: PLANESANE_SITE,
-    applicationCategory: "TravelApplication",
-    operatingSystem: "Web",
-    description:
-      "PlaneSane scores flights on on-time performance, weather risk, connection safety, and fare quality, and — through StaySane — scores hotels on whether a stay will actually work out, so travelers can choose the most reliable trip rather than the cheapest one.",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    publisher: { "@type": "Organization", name: "Neurantra LLC", url: "https://neurantra.com" },
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        name: "PlaneSane",
+        url: PLANESANE_SITE,
+        applicationCategory: "TravelApplication",
+        operatingSystem: "Web",
+        description:
+          "PlaneSane scores flights on on-time performance, weather risk, connection safety, and fare quality, and — through StaySane — scores hotels on whether a stay will actually work out, so travelers can choose the most reliable trip rather than the cheapest one.",
+        offers: freeOffer,
+        publisher,
+      },
+      {
+        "@type": "MobileApplication",
+        name: "PlaneSane: Best Flight Finder",
+        applicationCategory: "TravelApplication",
+        operatingSystem: "iOS, Android",
+        description:
+          "The PlaneSane app scores every flight option on reliability, weather risk, connection safety, and fare quality, and carries Wright, the in-product assistant that explains the score.",
+        installUrl: [PLANESANE_APP_STORE, PLANESANE_PLAY_STORE],
+        offers: freeOffer,
+        publisher,
+      },
+    ],
   };
 
   return (
@@ -132,7 +158,7 @@ export default function PlaneSanePage() {
               className="h-[72px] w-[72px] rounded-2xl"
             />
             <span className="inline-flex items-center whitespace-nowrap rounded-full border border-[#C9DED7] bg-[#E6F0EC] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#1F4C40]">
-              Live at planesane.com
+              Live on the web, iOS &amp; Android
             </span>
           </div>
           <h1 className="max-w-3xl text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-[60px]">
@@ -158,6 +184,24 @@ export default function PlaneSanePage() {
               className="inline-flex h-12 items-center justify-center rounded-full border border-line bg-transparent px-7 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background"
             >
               Meet StaySane
+            </a>
+          </div>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <a
+              href={PLANESANE_APP_STORE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-line bg-transparent px-6 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Download on the App Store
+            </a>
+            <a
+              href={PLANESANE_PLAY_STORE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-line bg-transparent px-6 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Get it on Google Play
             </a>
           </div>
         </div>
@@ -192,10 +236,13 @@ export default function PlaneSanePage() {
               <p className="mt-6 text-base leading-relaxed text-muted">
                 PlaneSane is deterministic where it counts: the scoring engine is
                 rules- and data-driven, and AI is used to explain and classify —
-                never to invent a number. It is built on certified, licensed, and
-                authoritative public data. Coverage centers on US carriers and
-                routes to and from the US. Scores inform a decision; they are not
-                a guarantee of on-time performance.
+                never to invent a number. Wright, the in-product assistant, reads
+                the score you are looking at and answers from it rather than from
+                the open internet. PlaneSane runs at planesane.com and as a free
+                app on iOS and Android; the full flight and hotel experience is on
+                the web today, and the app carries flights and Wright with hotels
+                following. Scores inform a decision; they are not a guarantee of
+                on-time performance.
               </p>
             </div>
           </div>
@@ -288,7 +335,8 @@ export default function PlaneSanePage() {
             Advisory, like the flight side: StaySane scores and explains, then hands
             you off to a booking partner. Wright, the in-product assistant, carries
             the hotel you are looking at — ask it what the biggest risk here is and
-            it answers from that property&rsquo;s own score.
+            it answers from that property&rsquo;s own score. StaySane is live on the
+            web now, and is coming to the iOS and Android apps.
           </p>
         </div>
       </section>
@@ -313,14 +361,32 @@ export default function PlaneSanePage() {
             things that actually decide whether your trip goes smoothly — then
             switch to hotels and do the same for where you land.
           </p>
-          <a
-            href={PLANESANE_SITE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-foreground px-8 text-sm font-semibold text-background transition-opacity hover:opacity-90"
-          >
-            Visit planesane.com →
-          </a>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <a
+              href={PLANESANE_SITE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-foreground px-8 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+            >
+              Visit planesane.com →
+            </a>
+            <a
+              href={PLANESANE_APP_STORE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-line bg-transparent px-7 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Download on the App Store
+            </a>
+            <a
+              href={PLANESANE_PLAY_STORE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-line bg-transparent px-7 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Get it on Google Play
+            </a>
+          </div>
         </div>
       </section>
 

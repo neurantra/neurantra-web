@@ -47,7 +47,7 @@ const PRODUCTS: Product[] = [
   {
     name: "PlaneSane",
     tagline: "Choose the best flight — and now the best hotel — not just the cheapest. Reliability, weather, connection, and fare risk from years of flight data; hotels scored by StaySane.",
-    domain: "Travel · flights & hotels",
+    domain: "Travel · web, iOS & Android",
     status: "Live",
     url: "/planesane",
     internal: true,
@@ -90,7 +90,7 @@ const LATEST = [
     href: "/planesane",
     headline: "Hotels, scored the way flights are.",
     body:
-      "StaySane is the lodging half — a 0-100 risk score built from what guests actually complain about, how the location really works, and whether the rate is fair for that city. Thin evidence is withheld, not guessed.",
+      "StaySane is the lodging half — a 0-100 risk score built from what guests actually complain about, how the location really works, and whether the rate is fair for that city. Thin evidence is withheld, not guessed. On the web now; the flight side is also a free app on iOS and Android.",
   },
   {
     when: "July 2026",
