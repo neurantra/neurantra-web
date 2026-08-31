@@ -123,20 +123,30 @@ different stores and drift apart legitimately.
 
 ---
 
-## Still missing
+## Every app, both scripts
 
 | app | `release-prep.sh` | `build-android.sh` |
 |---|---|---|
 | planesane | ✅ | ✅ |
 | pawcial | ✅ | ✅ |
-| surgerycare-app | ✅ | ❌ |
-| chaturang-app | ✅ | ❌ |
-| puzzlecub-app | ✅ | ❌ |
+| surgerycare-app | ✅ | ✅ *(wraps the existing npm pipeline)* |
+| chaturang-app | ✅ | ✅ |
+| puzzlecub-app | ✅ | ✅ |
 
-The two Expo scripts share a convention worth copying: signing config lives in
-`~/.gradle/gradle.properties` under an app-specific prefix (`PLANESANE_UPLOAD_*`,
-`PAWCIAL_UPLOAD_*`), never in the repo. Flutter signs from `android/key.properties` instead —
-different mechanism, same script name and flags.
+`release-prep.sh` is byte-identical in the three Expo apps and `build-android.sh` is
+byte-identical in the two Flutter apps, so a fix in one is a copy away from the rest.
+
+Signing differs by framework and never lives in a repo. Expo reads
+`~/.gradle/gradle.properties` under an app-specific prefix — `PLANESANE_UPLOAD_*`,
+`PAWCIAL_UPLOAD_*`, and `MYSURGEON_UPLOAD_*` for surgerycare, whose prefix predates the app's
+rename and is kept because the plugin and any existing properties already use it. Flutter reads
+`android/key.properties`, gitignored, pointing at a keystore in `android/app/` — Gradle resolves
+that relative path against the module directory, not `android/`.
+
+surgerycare's script is a wrapper rather than a rewrite. Its npm pipeline refuses to build
+without `EXPO_PUBLIC_API_BASE_URL`, and then opens the finished bundle to confirm the host is
+inside it — written after a hostless AAB reached the Play Store twice, in 1.0.2 and again in
+1.0.3, each time shipping an app whose every screen read "NO API HOST".
 
 ---
 
