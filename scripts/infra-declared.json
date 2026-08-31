@@ -1,0 +1,61 @@
+{
+  "_comment": [
+    "Facts about the estate that no API and no file can confirm, so a human has to state them.",
+    "Everything NOT in this file is derived at generation time — see build-infra-tracker.py.",
+    "",
+    "The previous tracker inferred hosting from files on disk, and got two repos wrong in the",
+    "same way: a render.yaml in the tree made it say indiamasala deploys to Render (it does not,",
+    "that config was ported to GitHub Actions and deleted), and a main.tf made it say",
+    "surgerycare-web is on AWS (its backend is; the site is Cloudflare Pages). A file existing is",
+    "evidence that something was once true. It is not evidence of where traffic goes today.",
+    "",
+    "So hosting, live URLs and budgets are DECLARED here and marked as such in the output. If one",
+    "is wrong, it is wrong because someone wrote it down wrong, not because a heuristic guessed."
+  ],
+
+  "org": "neurantra",
+  "actions_budget_usd": 25,
+  "actions_included_minutes": 3000,
+  "actions_plan": "GitHub Team",
+
+  "repos": {
+    "indiamasala-web":       { "purpose": "Streaming availability + discovery for Indian cinema", "hosting": "Vercel", "trigger": "push to main", "root_dir": "web", "url": "https://indiamasala.com", "extra": "22 scheduled GitHub Actions workflows run the Python ingest against Postgres" },
+    "pawcial-web-and-app":   { "purpose": "Social app for dogs and dog owners", "hosting": "Vercel", "trigger": "push to main", "root_dir": "apps/web", "url": null, "extra": "pnpm workspace: apps/web, apps/mobile, packages/shared" },
+    "planesane-web-and-app": { "purpose": "Explainable flight intelligence and recommendations", "hosting": "Vercel (web) + Render (FastAPI api)", "trigger": "push to main", "root_dir": "web", "url": null, "extra": "Develop on staging, fast-forward to main. A free Render staging service tracks the staging branch — that is why the branch exists. Serving DB is Neon." },
+    "puzzlecub-web":         { "purpose": "Marketing site for Puzzlecub", "hosting": "Vercel", "trigger": "push to main", "root_dir": "(repo root)", "url": "https://puzzlecub.com", "extra": null },
+    "neurantra-web":         { "purpose": "Neurantra public site and product platform pages", "hosting": "Vercel", "trigger": "push to main", "root_dir": "(repo root)", "url": null, "extra": "Holds docs/SHIPPING.md, the canonical shipping runbook, and this generator" },
+    "surgerycare-web":       { "purpose": "Marketing site for surgerycare.app", "hosting": "Cloudflare Pages (built by GitHub Actions)", "trigger": "push to main", "root_dir": "(repo root) -> dist", "url": "https://surgerycare.app", "extra": "The Pages project has NO Git integration and cannot be given one; the Action hands it a built dist/. Cloudflare's build log for it is permanently empty — read the Action's. backend/infra is separate AWS Terraform." },
+    "iyerspine-web":         { "purpose": "Neurantra AI Platform", "hosting": "AWS", "trigger": "manual scripts", "root_dir": "neurantra-agents/ortho-ai-assistant/app", "url": "https://www.iyerspine.com", "extra": "The one exception to push-to-main: deploy.config.*.json plus a mix of shell and PowerShell. Was on web-main until 2026-08-31." },
+    "chaturang-app":         { "purpose": "Chess app", "hosting": "App Store / Play", "trigger": "manual", "root_dir": null, "url": null, "extra": "Flutter" },
+    "puzzlecub-app":         { "purpose": "Puzzlecub games (7 titles)", "hosting": "App Store / Play", "trigger": "manual", "root_dir": null, "url": null, "extra": "Flutter. Renamed from sumquest on 2026-08-31." },
+    "surgerycare-app":       { "purpose": "Surgery Care patient app", "hosting": "App Store / Play", "trigger": "manual", "root_dir": null, "url": null, "extra": "Its clone lives inside iyerspine-web's working tree and is gitignored by it, so a folder scan of ~/dev walks past it. It is a separate repo." }
+  },
+
+  "mobile_apps": [
+    { "app": "planesane",       "repo": "planesane-web-and-app", "path": "mobile",              "signing": "PLANESANE_UPLOAD_* in ~/.gradle/gradle.properties" },
+    { "app": "pawcial",         "repo": "pawcial-web-and-app",   "path": "apps/mobile",         "signing": "PAWCIAL_UPLOAD_* in ~/.gradle/gradle.properties; injected at prebuild by plugins/withAndroidSigning.js" },
+    { "app": "surgerycare-app", "repo": "surgerycare-app",       "path": ".",                   "signing": "MYSURGEON_UPLOAD_* in ~/.gradle/gradle.properties; injected by plugins/withReleaseSigning.js. Prefix predates the rename." },
+    { "app": "chaturang-app",   "repo": "chaturang-app",         "path": ".",                   "signing": "android/key.properties -> android/app/upload-keystore.jks (both gitignored)" },
+    { "app": "puzzlecub-app",   "repo": "puzzlecub-app",         "path": ".",                   "signing": "android/key.properties -> android/app/upload-keystore.jks (both gitignored)" }
+  ],
+
+  "services": [
+    { "service": "GitHub Actions", "used_by": "indiamasala-web (22 workflows), planesane-web-and-app (11), surgerycare-web (1), pawcial-web-and-app (1)", "billed_to": "neurantra org", "limit": "3,000 min included on Team, $25 budget, Stop usage: Yes", "note": "indiamasala is ~94% of the load. The daily digest reports the month's pace and warns at 80% of the cap." },
+    { "service": "Vercel",         "used_by": "indiamasala-web, pawcial-web-and-app, planesane-web-and-app, puzzlecub-web, neurantra-web", "billed_to": "Vercel account", "limit": "not tracked here", "note": "All five confirmed deploying on push. Root directory is the only per-project setting." },
+    { "service": "Cloudflare",     "used_by": "surgerycare-web (Pages + a workers.dev preview Worker)", "billed_to": "Cloudflare account", "limit": "18 of 3,000 Workers build minutes used in Aug 2026", "note": "Deploy token is scoped to Cloudflare Pages: Edit only." },
+    { "service": "Render",         "used_by": "planesane-web-and-app (FastAPI api, production + a free staging service)", "billed_to": "Render account", "limit": "not tracked here", "note": "Staging is created by hand because Blueprints cannot create free instances." },
+    { "service": "AWS",            "used_by": "iyerspine-web (ECS/RDS), surgerycare-web/backend (Terraform), indiamasala-web (SES for the digest)", "billed_to": "AWS account", "limit": "not tracked here", "note": null },
+    { "service": "Supabase",       "used_by": "indiamasala-web, pawcial-web-and-app", "billed_to": "Supabase account", "limit": "not tracked here", "note": "indiamasala: Python writes, Next reads. im_web has select and nothing else." },
+    { "service": "Neon",           "used_by": "planesane-web-and-app", "billed_to": "Neon account", "limit": "not tracked here", "note": "Staging uses a Neon branch." },
+    { "service": "Apple Developer","used_by": "all 5 mobile apps", "billed_to": "Apple", "limit": "n/a — builds are local, Xcode Cloud is deliberately not used", "note": "Set aside to avoid a second metered build service." },
+    { "service": "Google Play",    "used_by": "all 5 mobile apps", "billed_to": "Google", "limit": "n/a", "note": "Upload keystores are irreplaceable — lose one and that app can never be updated under the same listing." }
+  ],
+
+  "attention": [
+    { "item": "Upload keystores exist only on this Mac", "repos": "chaturang-app, puzzlecub-app, and the 3 Expo apps' gradle.properties", "why": "Gitignored by design and correctly so. But a lost keystore means that app can never be updated on Play under the same listing, and a fresh machine cannot build until both the keystore file and its properties are restored.", "action": "Keep each keystore and its properties together in the password manager." },
+    { "item": "OR photo licensing unconfirmed on a live page", "repos": "surgerycare-web", "why": "The README records the hero images as free-to-use pending confirmation. That confirmation never happened, and the site went live 25 August.", "action": "Confirm licensing or swap the images." },
+    { "item": "App screens on the live site are renderings", "repos": "surgerycare-web", "why": "Listed as a pre-launch item; launch happened without it. A visitor sees illustrations of a product on a page selling that product.", "action": "Replace with real screenshots when the UI is final." },
+    { "item": "sync/web-main-to-v1.2 has 490 unmerged commits", "repos": "iyerspine-web", "why": "A bridge branch between two histories that had no common ancestor. The old line it was syncing into was deleted on 2026-08-31; this branch was kept because it shares history with the live main.", "action": "Decide whether anything on it is still wanted, then delete." },
+    { "item": "The tracker's own generator is the thing to maintain", "repos": "neurantra-web", "why": "The previous spreadsheet was hand-corrected and would have been overwritten by its own scanner. This one derives what it can and declares the rest, so a re-run is safe.", "action": "Edit infra-declared.json, not the .xlsx." }
+  ]
+}

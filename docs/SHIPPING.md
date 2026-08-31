@@ -6,6 +6,14 @@ to keep in sync.
 
 Last verified against all ten repositories: **31 August 2026**.
 
+Companion: the infrastructure tracker at `~/dev/outputs/infra-tracker.xlsx` records *what
+exists* — repos, hosting, services, secret names, open risks. This file records *how to ship*.
+The tracker is generated, not maintained:
+
+```bash
+cd ~/dev/neurantra-web && uv run --with openpyxl python scripts/build-infra-tracker.py
+```
+
 ---
 
 ## Branches
