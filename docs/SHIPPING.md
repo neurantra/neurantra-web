@@ -92,13 +92,15 @@ Android, when you want it:
 
 ### Why release-prep exists
 
-In an Expo app with a committed `ios/`, the version lived in **four** files until 2026-08-31,
-when both such apps were changed to read `$(MARKETING_VERSION)` and `$(CURRENT_PROJECT_VERSION)`
-from the build setting — the Xcode default, and what Flutter already did. Three remain. A build with one of
-them stale is not a build that fails — it compiles, signs, uploads, and is rejected by App Store
-Connect afterwards. planesane lost two uploads to this on 2026-08-29 because `Info.plist` carries
-the version as a literal rather than `$(MARKETING_VERSION)`, so bumping `app.json` and the pbxproj
-left the actual bundle behind.
+A build whose version sources disagree is not a build that fails. It compiles, signs, uploads,
+and is rejected by App Store Connect afterwards — which costs a round trip to discover. planesane
+lost two uploads to this on 2026-08-29: `Info.plist` held the version as a literal, so bumping
+`app.json` and the pbxproj left the bundle itself behind.
+
+Both Expo apps with a committed `ios/` were changed on 2026-08-31 to read `$(MARKETING_VERSION)`
+and `$(CURRENT_PROJECT_VERSION)` from the build setting instead — the Xcode default, and what the
+Flutter apps already did. That took the count from four places to three, and removed the two that
+had actually gone stale.
 
 The same script is in all five apps and adapts to three different shapes, detected rather than
 configured:
