@@ -203,9 +203,23 @@ on 2026-08-31: `PAWCIAL_UPLOAD_STORE_FILE` still pointed into `~/dev/pawcial/paw
 no longer exists. `build-android.sh` stopped on it before building rather than after, which is
 exactly why that check is in the script.
 
-**`PLANESANE_UPLOAD_STORE_FILE` is stale in the same way right now** — it points at
-`~/dev/planesane/mobile` while the keystore sits in `~/dev/planesane-web-and-app/mobile`. The next
-planesane Android build will stop there. Audit all of them with:
+`planesane` was stale in the same way and was found by the audit rather than by a build:
+`PLANESANE_UPLOAD_STORE_FILE` pointed at `~/dev/planesane/mobile` while the keystore sat in
+`~/dev/planesane-web-and-app/mobile`.
+
+**Both were fixed on 2026-08-31 by moving the keystores out of the repos**, which is what the
+convention already said and what makes the failure impossible rather than merely detected — a
+path under `~/keys/` does not move when a clone does. All three now resolve there:
+
+```
+PLANESANE_UPLOAD_STORE_FILE -> ~/keys/@mohaniyer__planesane.jks
+MYSURGEON_UPLOAD_STORE_FILE -> ~/keys/mysurgeon-upload.keystore
+PAWCIAL_UPLOAD_STORE_FILE   -> ~/keys/@mohaniyer__pawcial.jks
+```
+
+Move one the careful way, because the file is irreplaceable: copy it, compare SHA-256, confirm it
+opens with the stored password and alias, run `./gradlew signingReport` to prove Gradle resolves
+the new path, and only then delete the original. Re-run the audit afterwards:
 
 ```bash
 grep -E "_UPLOAD_STORE_FILE=" ~/.gradle/gradle.properties | while IFS='=' read -r k v; do
@@ -217,6 +231,13 @@ The same repo move is what left pawcial's CocoaPods project pointing into the ol
 the iOS build with *"Unable to open base configuration reference file"* until `pod install` was
 re-run. A moved clone breaks generated and external references, not tracked ones — so nothing in
 `git status` shows it and it surfaces only at build time.
+
+**Check which keystore is live before moving one — the filename is not proof.** `planesane` keeps
+two, and `@mohaniyer__planesane_OLD_1.jks` does not open with the stored password at all, so it is
+a different key rather than a stale copy of the same one. It is still in
+`planesane-web-and-app/mobile`, gitignored and untracked, and nobody currently knows what it is
+for: archive it to the password manager and delete it if the listing was re-keyed, keep it if it
+predates Play App Signing enrolment.
 
 **`surgerycare-app` is a repository inside another repository.** It sits at
 `iyerspine-web/neurantra-agents/ortho-ai-assistant/surgerycare-app`, gitignored by its parent
