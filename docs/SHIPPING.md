@@ -98,6 +98,37 @@ Android, when you want it:
 ./scripts/build-android.sh --apk     # signed .apk for sideload / QA
 ```
 
+### pawcial's iOS build is scripted, and has to be
+
+`pawcial` is the one CNG app, and that costs it two things Xcode cannot supply by itself.
+
+**The signing team does not survive `prebuild`.** `ios/` is regenerated from `app.json`, and
+prebuild writes no `DEVELOPMENT_TEAM` — it exists only in `eas.json`, which is inert without EAS.
+So every clean prebuild produces a project that fails with *"Signing for Pawcial requires a
+development team"* until someone picks one in Xcode.
+
+**The Google keys differ per platform.** `.env.production` holds the ANDROID keys, restricted by
+package name and signing SHA1. Expo reads that file whenever `NODE_ENV=production` — including
+during an Xcode Archive — so archiving straight from Xcode ships iOS with Android keys. The build
+compiles, signs, uploads and installs perfectly, and then has every Maps and Places call rejected
+at runtime. The iOS values live in `.env.production.ios`, a filename nothing reads on its own:
+Expo's convention knows `.env`, `.env.local`, `.env.production` and `.env.production.local`.
+
+```bash
+./scripts/build-ios.sh               # signed .xcarchive, then distribute from Organizer
+```
+
+It swaps the env in and restores it on exit, failure or interrupt — leaving it swapped would hand
+the next Android build the iOS keys — passes the team to `xcodebuild`, checks the built bundle's
+version against `app.json`, and archives into Xcode's own Archives folder so Organizer still lists
+it for `Distribute App`. Verified on 1.2.1 (build 35) by reading the artifacts: the iOS bundle
+carries the iOS keys, the `.aab` the Android ones, and neither contains `127.0.0.1`.
+
+Nothing to port yet. The other two Expo apps commit `ios/`, so their team persists, and neither
+has a separate iOS env — `planesane/mobile` has only `.env`, `.env.example` and `.env.production`,
+and `surgerycare-app` has none. This becomes their problem the day either gains a
+platform-restricted key.
+
 ### Why release-prep exists
 
 A build whose version sources disagree is not a build that fails. It compiles, signs, uploads,
@@ -131,15 +162,15 @@ different stores and drift apart legitimately.
 
 ---
 
-## Every app, both scripts
+## Every app, the scripts
 
-| app | `release-prep.sh` | `build-android.sh` |
-|---|---|---|
-| planesane | ✅ | ✅ |
-| pawcial | ✅ | ✅ |
-| surgerycare-app | ✅ | ✅ *(wraps the existing npm pipeline)* |
-| chaturang-app | ✅ | ✅ |
-| puzzlecub-app | ✅ | ✅ |
+| app | `release-prep.sh` | `build-android.sh` | `build-ios.sh` |
+|---|---|---|---|
+| planesane | ✅ | ✅ | — *(commits `ios/`; archive in Xcode)* |
+| pawcial | ✅ | ✅ | ✅ *(CNG — see above)* |
+| surgerycare-app | ✅ | ✅ *(wraps the existing npm pipeline)* | — *(commits `ios/`)* |
+| chaturang-app | ✅ | ✅ | — *(Flutter)* |
+| puzzlecub-app | ✅ | ✅ | — *(Flutter)* |
 
 `release-prep.sh` is byte-identical in the three Expo apps and `build-android.sh` is
 byte-identical in the two Flutter apps, so a fix in one is a copy away from the rest.
@@ -164,6 +195,28 @@ inside it — written after a hostless AAB reached the Play Store twice, in 1.0.
 the same listing. They live outside the repo by design, which also means a fresh machine cannot
 produce an uploadable build until both the keystore file and its `gradle.properties` entries are
 restored. Keep them together in the password manager.
+
+**`gradle.properties` holds absolute paths, and moving a working copy breaks them silently.**
+The upload keystore is referenced by full path from `~/.gradle/gradle.properties`, which lives
+outside every repo — so it is not moved, updated or reviewed when a clone is. `pawcial` hit this
+on 2026-08-31: `PAWCIAL_UPLOAD_STORE_FILE` still pointed into `~/dev/pawcial/pawcial`, a path that
+no longer exists. `build-android.sh` stopped on it before building rather than after, which is
+exactly why that check is in the script.
+
+**`PLANESANE_UPLOAD_STORE_FILE` is stale in the same way right now** — it points at
+`~/dev/planesane/mobile` while the keystore sits in `~/dev/planesane-web-and-app/mobile`. The next
+planesane Android build will stop there. Audit all of them with:
+
+```bash
+grep -E "_UPLOAD_STORE_FILE=" ~/.gradle/gradle.properties | while IFS='=' read -r k v; do
+  [ -f "$v" ] && echo "ok      $k" || echo "MISSING $k -> $v"
+done
+```
+
+The same repo move is what left pawcial's CocoaPods project pointing into the old path, failing
+the iOS build with *"Unable to open base configuration reference file"* until `pod install` was
+re-run. A moved clone breaks generated and external references, not tracked ones — so nothing in
+`git status` shows it and it surfaces only at build time.
 
 **`surgerycare-app` is a repository inside another repository.** It sits at
 `iyerspine-web/neurantra-agents/ortho-ai-assistant/surgerycare-app`, gitignored by its parent
