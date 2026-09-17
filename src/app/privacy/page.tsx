@@ -5,11 +5,11 @@ import { SiteHeader } from "../_components/SiteHeader";
 export const metadata: Metadata = {
   title: "Privacy Policy — Neurantra",
   description:
-    "How Neurantra LLC handles information across neurantra.com and Puzzlecub. Advertising disclosures, children's privacy, and your rights.",
+    "How Neurantra LLC handles information across neurantra.com, Puzzlecub, and Fill the Jar: Shape Puzzle. Advertising disclosures, children's privacy, and your rights.",
   alternates: { canonical: "/privacy" },
 };
 
-const LAST_UPDATED = "June 7, 2026";
+const LAST_UPDATED = "September 16, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -33,8 +33,11 @@ export default function PrivacyPage() {
                 respects your privacy. This Privacy Policy explains how we handle information
                 when you visit{" "}
                 <span className="font-medium text-foreground">neurantra.com</span> or use{" "}
-                <span className="font-medium text-foreground">Puzzlecub</span>, our mobile
-                educational game (together, the &ldquo;Services&rdquo;).
+                <span className="font-medium text-foreground">Puzzlecub</span> or{" "}
+                <span className="font-medium text-foreground">Fill the Jar: Shape Puzzle</span>
+                , our mobile games (together, the &ldquo;Services&rdquo;). App-specific
+                sections describe the practices of the named game; their age settings and
+                optional online features may differ.
               </p>
               <p className="mt-3">
                 Our other products{" "}
@@ -83,17 +86,19 @@ export default function PrivacyPage() {
               </h3>
               <p className="mt-2">
                 Puzzlecub stores gameplay data (scores, levels, progress) locally on the
-                device. We do not collect, transmit, or store gameplay or progress data on
-                our servers, and we do not require accounts, names, email addresses, or any
-                other personally identifying information from the player. On first launch,
+                device. Ordinary puzzle progress is not synchronized to our servers. Optional
+                shared-vault coin transfers are an exception: they use Firebase identifiers
+                and server-side balances and transaction records, as described below. Core
+                gameplay does not require a name, email address, or password. On first launch,
                 Puzzlecub asks for the player&rsquo;s year of birth; this value is stored
                 only on the device and is used locally to decide which child-safety
                 protections to apply (see Section 4). It is never transmitted to our servers.
               </p>
               <p className="mt-3">
                 We do not use Apple&rsquo;s IDFA (Identifier for Advertisers) or Google&rsquo;s
-                Advertising ID (AAID), and we do not maintain a persistent user identifier that
-                follows you across apps or websites. We do not track you across apps or websites
+                Advertising ID (AAID) for Puzzlecub advertising. The optional shared vault does
+                use persistent anonymous identifiers to connect participating Neurantra games.
+                We do not track you across apps or websites
                 owned by other companies. The limited technical signals described in Sections 2
                 and 3 are processed by Google AdMob and Firebase Crashlytics solely to serve
                 non-personalized ads and to diagnose crashes.
@@ -115,6 +120,47 @@ export default function PrivacyPage() {
                 </a>
                 , we receive the email content and email address you choose to share, processed
                 through Google Workspace.
+              </p>
+            </Section>
+
+            <Section heading="Fill the Jar: Shape Puzzle — information and optional online features">
+              <p>
+                Fill the Jar stores puzzle progress, settings, cosmetic unlocks, and the local
+                coin balance on your device. Core puzzles work offline and do not require a
+                name, email address, or password. Ordinary puzzle progress is not synchronized
+                to our servers. The local year-of-birth declaration and protected experience
+                are described in Section 4.
+              </p>
+              <h3 className="mt-5 text-base font-semibold text-foreground">Optional Neurantra coin vault</h3>
+              <p className="mt-2">
+                Eligible older players can use a shared coin vault across participating
+                Neurantra games, including Puzzlecub and Chaturang. The vault uses Google
+                Firebase Authentication and Realtime Database. It creates an anonymous user
+                identifier and stores vault and member identifiers, game identifiers, coin
+                balances, link codes, and transfer records, including amounts, status, and
+                timestamps. These records allow transfers to complete reliably and help
+                prevent duplicate transfers and abuse. Anonymous identifiers are persistent
+                identifiers even though we do not ask for your real name. Game coins have
+                no cash value.
+              </p>
+              <p className="mt-3">
+                Firebase also processes technical request information, including IP address
+                and client information, to operate and secure its services. Linking a game
+                connects it to the shared balance and associated vault records; it does not
+                synchronize all gameplay between games. Link codes expire after 30 minutes.
+                Keep them private and share them only between devices you intend to link.
+              </p>
+              <p className="mt-3">
+                Unlinking a device does not delete its Firebase identity or historical
+                transactions. Deleting the app or clearing app data can erase local progress
+                and the birth-year declaration, but does not automatically delete server-side
+                vault data. See Sections 8 and 9 for requests and retention information.
+              </p>
+              <p className="mt-3">
+                Links to other games or our website open separate products or pages with their
+                own applicable privacy practices. Fill the Jar does not show sibling-game
+                promotions in its protected experience. This policy does not replace the
+                privacy notice for Chaturang or other separately described products.
               </p>
             </Section>
 
@@ -227,6 +273,33 @@ export default function PrivacyPage() {
                 </a>
                 .
               </p>
+              <h3 className="mt-6 text-base font-semibold text-foreground">
+                c. Fill the Jar — optional rewarded advertising
+              </h3>
+              <p className="mt-2">
+                Eligible older players can choose rewarded ads through Google AdMob. The
+                protected experience has no ad offers or ad requests. For eligible players,
+                the app requests consent information and presents Google&rsquo;s consent form
+                where required before requesting ads. Ad privacy choices are available from
+                the menu when Google requires a privacy-options form.
+              </p>
+              <p className="mt-3">
+                When advertising services are used, Google may process IP-derived approximate
+                location, device identifiers, app and ad interactions, advertising data, and
+                crash or performance information for ad delivery, measurement, analytics, and
+                fraud prevention. Processing depends on platform permissions, consent choices,
+                and the SDK configuration. Version 0.1 testing builds use test advertisements;
+                test ads do not mean that the SDK processes no information.
+              </p>
+              <p className="mt-3">
+                See Google&rsquo;s{" "}
+                <a href="https://policies.google.com/technologies/partner-sites" target="_blank"
+                  rel="noopener noreferrer" className="text-accent underline-offset-2 hover:underline">
+                  information about services used by apps
+                </a>{" "}
+                for its advertising data practices. Fill the Jar does not include Firebase
+                Analytics or Firebase Crashlytics; ad-SDK diagnostics are separate.
+              </p>
             </Section>
 
             <Section heading="3. Crash diagnostics">
@@ -269,6 +342,27 @@ export default function PrivacyPage() {
             </Section>
 
             <Section heading="4. Children's privacy (COPPA / GDPR-K)">
+              <h3 className="mt-2 text-base font-semibold text-foreground">Fill the Jar</h3>
+              <p className="mt-2">
+                On first launch, Fill the Jar asks for a year of birth with no preselected
+                answer. The declaration is stored only on the device and is not sent to the
+                vault or used as advertising profile data. This is a self-declaration, not
+                identity verification or parental consent.
+              </p>
+              <p className="mt-3">
+                Because we do not ask for a birthday, we calculate a minimum possible age as
+                the current year minus the declared birth year minus one. Players whose
+                minimum possible age is below 16 receive the protected experience worldwide.
+                An unanswered or invalid declaration does not enable online features.
+              </p>
+              <p className="mt-3">
+                Protected players can play every puzzle, earn local coins, and use those coins
+                for hints, auto-solve, and cosmetic unlocks. The app does not enable rewarded
+                ads, banners, shared-vault connections, sibling-game promotions, or store-rating
+                links for these players. A birth-year answer is required before entering the
+                game, and there is no in-game shortcut to change it to unlock online features.
+              </p>
+              <h3 className="mt-5 text-base font-semibold text-foreground">Puzzlecub</h3>
               <p>
                 Puzzlecub is designed for players of every age. To meet our obligations under
                 the Children&rsquo;s Online Privacy Protection Act (COPPA) in the United States,
@@ -303,7 +397,7 @@ export default function PrivacyPage() {
                 Across all players, regardless of age, Puzzlecub:
               </p>
               <ul className="mt-2 list-disc space-y-1.5 pl-6">
-                <li>Does not require an account, name, email address, or any identifier</li>
+                <li>Does not require a name, email address, or password for core gameplay; optional vault use involves anonymous identifiers</li>
                 <li>
                   Does not enable in-app chat, social features, user-to-user communication, or
                   user-generated content
@@ -364,8 +458,12 @@ export default function PrivacyPage() {
                   subject to Section 2a
                 </li>
                 <li>
-                  With Google AdMob to serve ads within Puzzlecub, subject to the limits in
-                  Section 2b
+                  With Google AdMob to serve ads within Puzzlecub and, for eligible older
+                  players, Fill the Jar, subject to the app-specific limits in Section 2
+                </li>
+                <li>
+                  With Google Firebase Authentication and Realtime Database to operate the
+                  optional shared vault, and with participating Neurantra games you link to it
                 </li>
                 <li>
                   With Google (Firebase Crashlytics) to receive crash diagnostic reports,
@@ -425,7 +523,7 @@ export default function PrivacyPage() {
                   >
                     Google AdSense
                   </a>{" "}
-                  (advertising on neurantra.com), Google AdMob (advertising in Puzzlecub), and{" "}
+                  (advertising on neurantra.com), Google AdMob (advertising in Puzzlecub and eligible Fill the Jar sessions), and{" "}
                   <a
                     href="https://firebase.google.com/support/privacy"
                     target="_blank"
@@ -434,7 +532,8 @@ export default function PrivacyPage() {
                   >
                     Firebase Crashlytics
                   </a>{" "}
-                  (crash diagnostics in Puzzlecub)
+                  (crash diagnostics in Puzzlecub), plus Firebase Authentication and Realtime
+                  Database (the optional shared coin vault)
                 </li>
                 <li>
                   Apple App Store and Google Play (app distribution), governed by Apple&rsquo;s
@@ -456,7 +555,7 @@ export default function PrivacyPage() {
                 to correct inaccurate information, and to opt out of sale or sharing for
                 cross-context behavioral advertising. We do not sell personal information for
                 money. We do &ldquo;share&rdquo; personal information for cross-context behavioral
-                advertising only on neurantra.com, through Google AdSense personalized ads; you can
+                advertising on neurantra.com through Google AdSense personalized ads; you can
                 opt out of personalized ads using Google&rsquo;s{" "}
                 <a
                   href="https://myadcenter.google.com/"
@@ -466,7 +565,8 @@ export default function PrivacyPage() {
                 >
                   Ad Settings
                 </a>
-                . We do not share Puzzlecub data for cross-context behavioral advertising.
+                . Fill the Jar advertising data and choices are described separately in Section 2c.
+                We do not share Puzzlecub data for cross-context behavioral advertising.
               </p>
               <p className="mt-3">
                 For EU, UK, and EEA residents (GDPR / UK GDPR), our legal bases for processing
@@ -484,6 +584,16 @@ export default function PrivacyPage() {
                 </a>
                 . We will respond within the period required by applicable law.
               </p>
+              <p className="mt-3">
+                For Fill the Jar access, correction, or deletion requests, email{" "}
+                <a href="mailto:hello@neurantra.com?subject=Fill%20the%20Jar%20privacy%20request"
+                  className="text-accent underline-offset-2 hover:underline">hello@neurantra.com</a>
+                . Tell us which game and request you are contacting us about. Do not send
+                passwords or active link codes. We may need additional information to locate
+                the relevant anonymous vault records and verify that the request is authorized.
+                Unlinking is not a deletion request; the current testing build does not offer
+                an automated in-app identity and transaction-history deletion tool.
+              </p>
             </Section>
 
             <Section heading="9. Data retention">
@@ -491,8 +601,20 @@ export default function PrivacyPage() {
                 We retain server logs for up to 90 days for security and operational purposes.
                 Email correspondence is retained as long as needed to address your inquiry and
                 to satisfy any legal recordkeeping requirements. Puzzlecub gameplay data is
-                retained on your device until you delete the app or clear its data — we do not
-                retain a copy.
+                retained on your device until you delete the app or clear its data. This local-only
+                statement does not apply to optional shared-vault records.
+              </p>
+              <p className="mt-3">
+                Fill the Jar local saves and birth-year declarations remain on the device
+                until its app data is removed. Server-side vault identities, memberships,
+                balances, and transaction records persist independently of the app installation.
+                The current testing service does not automatically purge these records on
+                uninstall or unlink. Code expiry prevents further linking with that code;
+                it does not promise immediate removal of historical records. Contact us to
+                request deletion. Requests involving a shared balance or records needed to
+                resolve transfers, prevent abuse, or meet legal obligations may require
+                retaining limited information; we will explain any applicable limitation
+                when responding to the request.
               </p>
             </Section>
 
