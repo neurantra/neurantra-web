@@ -26,6 +26,17 @@ export default function PrivacyPage() {
           </h1>
           <p className="mt-4 text-sm text-muted">Last updated: {LAST_UPDATED}</p>
 
+          <aside className="mt-8 rounded-2xl border border-line bg-white/60 p-6">
+            <h2 className="text-lg font-semibold">Fill the Jar account and data deletion</h2>
+            <p className="mt-2 text-sm text-muted">
+              Request deletion by emailing hello@neurantra.com. No app reinstall is required
+              to submit a request.
+            </p>
+            <a href="#account-deletion" className="mt-3 inline-block font-semibold text-accent underline underline-offset-4">
+              View deletion instructions and retention details
+            </a>
+          </aside>
+
           <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/90">
             <section>
               <p>
@@ -154,7 +165,7 @@ export default function PrivacyPage() {
                 Unlinking a device does not delete its Firebase identity or historical
                 transactions. Deleting the app or clearing app data can erase local progress
                 and the birth-year declaration, but does not automatically delete server-side
-                vault data. See Sections 8 and 9 for requests and retention information.
+                vault data. See the account-deletion section below for requests and retention information.
               </p>
               <p className="mt-3">
                 Links to other games or our website open separate products or pages with their
@@ -595,6 +606,82 @@ export default function PrivacyPage() {
                 an automated in-app identity and transaction-history deletion tool.
               </p>
             </Section>
+
+            <section id="account-deletion" className="scroll-mt-24 rounded-2xl border border-line p-6">
+              <h2 className="text-xl font-semibold tracking-tight text-foreground">
+                Request deletion — Fill the Jar: Shape Puzzle
+              </h2>
+              <p className="mt-3">
+                Neurantra LLC accepts requests to delete your Fill the Jar anonymous vault
+                account and associated server-side data by email. You can submit a request
+                even if you have already uninstalled the app. This is a manually handled
+                request, not an immediate deletion button.
+              </p>
+              <ol className="mt-4 list-decimal space-y-3 pl-6">
+                <li>
+                  Email{" "}
+                  <a href="mailto:hello@neurantra.com?subject=Fill%20the%20Jar%20account%20deletion%20request"
+                    className="text-accent underline underline-offset-4">hello@neurantra.com</a>
+                  {" "}with the subject <strong>Fill the Jar account deletion request</strong>.
+                </li>
+                <li>
+                  Tell us whether you used the shared coin vault, which Neurantra games you
+                  linked, and whether you still have access to any linked device. If available,
+                  include approximate dates and amounts of recent vault transfers to help us
+                  locate the records. Do not send passwords, active linking codes, or identity
+                  documents in your initial email.
+                </li>
+                <li>
+                  We will reply to acknowledge the request and, where needed, help locate the
+                  anonymous account and verify your authority before deleting anything. Your
+                  email address is not automatically associated with your Firebase identity,
+                  and transaction details alone do not establish ownership. If no linked
+                  device or usable account information remains, we may be unable to identify
+                  or verify the account; we will explain this rather than delete another
+                  player&rsquo;s records.
+                </li>
+              </ol>
+              <h3 className="mt-5 font-semibold">What is deleted</h3>
+              <p className="mt-2">
+                Following verification, we delete the applicable anonymous authentication
+                identity, vault membership, related linking records, and associated personal
+                data in transfer records, except for limited records retained for the reasons
+                below. We confirm the scope with you when a vault also serves Puzzlecub,
+                Chaturang, or another linked device. Deleting one app identity does not authorize
+                deletion of another player&rsquo;s account or the entire shared balance.
+                If your request covers a vault you control in full, its remaining balance and
+                associated data are included; deleted coins cannot be recovered.
+              </p>
+              <h3 className="mt-5 font-semibold">Timing and any retained data</h3>
+              <p className="mt-2">
+                We aim to complete verified requests within 30 days and confirm completion
+                by email. If verification or a shared-vault issue prevents completion within
+                that target, we will explain the reason and expected timing. Applicable legal
+                deadlines still apply. We may retain limited records where necessary to meet
+                legal obligations, resolve an outstanding transfer or dispute, or prevent
+                fraud. If an exception applies, our response will identify the categories,
+                reason, and applicable retention period or criteria; it does not permit us to
+                keep all account data indefinitely. Retained records are removed or anonymized
+                when that reason ends. There is no general automatic 90-day deletion schedule
+                for vault records.
+              </p>
+              <h3 className="mt-5 font-semibold">Local progress and other services</h3>
+              <p className="mt-2">
+                Puzzle progress, the birth-year declaration, settings, cosmetic unlocks, and
+                local coins stay on your device. We cannot erase that local save remotely;
+                remove the app&rsquo;s data using your device settings to delete it. Removing
+                local data, uninstalling, or unlinking a vault does not by itself submit a
+                server-side deletion request. Relevant requests for data held by our service
+                providers are handled as part of fulfilling your request. Google&rsquo;s own
+                advertising privacy controls also remain available through its services.
+              </p>
+              <p className="mt-3">
+                A parent or guardian may contact the same address about a child&rsquo;s data.
+                Fill the Jar&rsquo;s protected experience does not enable the shared vault
+                or advertising. If you never used online features, there may be no vault
+                account for us to delete.
+              </p>
+            </section>
 
             <Section heading="9. Data retention">
               <p>
