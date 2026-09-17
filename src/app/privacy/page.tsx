@@ -26,17 +26,6 @@ export default function PrivacyPage() {
           </h1>
           <p className="mt-4 text-sm text-muted">Last updated: {LAST_UPDATED}</p>
 
-          <aside className="mt-8 rounded-2xl border border-line bg-white/60 p-6">
-            <h2 className="text-lg font-semibold">Fill the Jar account and data deletion</h2>
-            <p className="mt-2 text-sm text-muted">
-              Request deletion by emailing hello@neurantra.com. No app reinstall is required
-              to submit a request.
-            </p>
-            <a href="#account-deletion" className="mt-3 inline-block font-semibold text-accent underline underline-offset-4">
-              View deletion instructions and retention details
-            </a>
-          </aside>
-
           <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/90">
             <section>
               <p>
