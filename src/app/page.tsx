@@ -63,6 +63,13 @@ const PRODUCTS: Product[] = [
     logo: "/puzzlecub/puzzlecub-logo.png",
   },
   {
+    name: "Fill the Jar",
+    tagline: "A little space. A perfect fit. Arrange colorful geometric pieces to fill the jar across 100 relaxing puzzles and four cheerful worlds. Coming to iOS and Android.",
+    domain: "Games · shape puzzles",
+    status: "Coming soon",
+    logo: "/fill-the-jar/icon.png",
+  },
+  {
     name: "Chaturang",
     tagline: "The 8th-century Indian ancestor of chess, reborn with a strong, self-play-tuned AI.",
     domain: "Games · board & strategy",
