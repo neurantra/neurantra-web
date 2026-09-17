@@ -5,7 +5,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 export const metadata: Metadata = {
   title: "Privacy Policy — Neurantra",
   description:
-    "How Neurantra LLC handles information across neurantra.com, Puzzlecub, and Fill the Jar: Shape Puzzle. Advertising disclosures, children's privacy, and your rights.",
+    "How Neurantra LLC handles information across neurantra.com, Puzzlecub, Chaturang, and Fill the Jar: Shape Puzzle. Advertising disclosures, children's privacy, and your rights.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -33,7 +33,8 @@ export default function PrivacyPage() {
                 respects your privacy. This Privacy Policy explains how we handle information
                 when you visit{" "}
                 <span className="font-medium text-foreground">neurantra.com</span> or use{" "}
-                <span className="font-medium text-foreground">Puzzlecub</span> or{" "}
+                <span className="font-medium text-foreground">Puzzlecub</span>,{" "}
+                <span className="font-medium text-foreground">Chaturang</span>, or{" "}
                 <span className="font-medium text-foreground">Fill the Jar: Shape Puzzle</span>
                 , our mobile games (together, the &ldquo;Services&rdquo;). App-specific
                 sections describe the practices of the named game; their age settings and
@@ -123,7 +124,7 @@ export default function PrivacyPage() {
               </p>
             </Section>
 
-            <Section heading="Fill the Jar: Shape Puzzle — information and optional online features">
+            <Section heading="Our games — local play and the shared Neurantra vault">
               <p>
                 Fill the Jar stores puzzle progress, settings, cosmetic unlocks, and the local
                 coin balance on your device. Core puzzles work offline and do not require a
@@ -131,10 +132,20 @@ export default function PrivacyPage() {
                 to our servers. The local year-of-birth declaration and protected experience
                 are described in Section 4.
               </p>
-              <h3 className="mt-5 text-base font-semibold text-foreground">Optional Neurantra coin vault</h3>
+              <h3 className="mt-5 text-base font-semibold text-foreground">Chaturang</h3>
               <p className="mt-2">
-                Eligible older players can use a shared coin vault across participating
-                Neurantra games, including Puzzlecub and Chaturang. The vault uses Google
+                Chaturang stores local game settings, statistics, and local coin information
+                on your device. Optional online multiplayer uses Firebase anonymous
+                authentication and Realtime Database to store room codes, player identifiers,
+                board positions, moves, game clocks, connection status, and match results.
+                This information keeps the two players&rsquo; games synchronized. Online
+                matches and shared-vault transfers are exceptions to local-only storage.
+              </p>
+              <h3 className="mt-5 text-base font-semibold text-foreground">Shared vault — Puzzlecub, Chaturang, and Fill the Jar</h3>
+              <p className="mt-2">
+                The optional shared coin vault connects Puzzlecub, Chaturang, and Fill the Jar.
+                Availability depends on each game&rsquo;s features and age settings; Fill the
+                Jar enables it only for eligible older players. The vault uses Google
                 Firebase Authentication and Realtime Database. It creates an anonymous user
                 identifier and stores vault and member identifiers, game identifiers, coin
                 balances, link codes, and transfer records, including amounts, status, and
@@ -159,8 +170,8 @@ export default function PrivacyPage() {
               <p className="mt-3">
                 Links to other games or our website open separate products or pages with their
                 own applicable privacy practices. Fill the Jar does not show sibling-game
-                promotions in its protected experience. This policy does not replace the
-                privacy notice for Chaturang or other separately described products.
+                promotions in its protected experience. This policy covers Puzzlecub, Chaturang, and Fill the Jar; other separately
+                described products may have their own privacy notices.
               </p>
             </Section>
 
@@ -302,6 +313,24 @@ export default function PrivacyPage() {
               </p>
             </Section>
 
+            <Section heading="Chaturang — advertising">
+              <p>
+                Chaturang uses Google AdMob for interstitial and optional rewarded ads.
+                It requests consent information through Google&rsquo;s consent service and
+                presents consent forms where required. On iOS, it requests App Tracking
+                Transparency authorization where applicable. Advertising personalization
+                and identifier use depend on your choices and platform permissions.
+              </p>
+              <p className="mt-3">
+                AdMob may process IP-derived approximate location, device identifiers,
+                advertising interactions, and diagnostic or performance data to deliver and
+                measure ads, support analytics, and prevent fraud. Google&rsquo;s advertising
+                practices linked in Section 2 also apply to Chaturang. Chaturang does not
+                include Firebase Analytics or Firebase Crashlytics; ad-SDK diagnostics are
+                separate from the Puzzlecub crash reporting described below.
+              </p>
+            </Section>
+
             <Section heading="3. Crash diagnostics">
               <p>
                 We use Firebase Crashlytics (a Google product) to receive crash reports when
@@ -361,6 +390,15 @@ export default function PrivacyPage() {
                 ads, banners, shared-vault connections, sibling-game promotions, or store-rating
                 links for these players. A birth-year answer is required before entering the
                 game, and there is no in-game shortcut to change it to unlock online features.
+              </p>
+              <h3 className="mt-5 text-base font-semibold text-foreground">Chaturang</h3>
+              <p className="mt-2">
+                Chaturang does not currently use Fill the Jar&rsquo;s birth-year declaration
+                or protected offline mode. Its ad consent and iOS tracking permission choices
+                are separate from age verification or parental consent. Do not assume that
+                linking games through the shared vault transfers age settings or parental
+                permissions between apps. Parents may contact us about privacy or deletion
+                requests for any of the three games using the process below.
               </p>
               <h3 className="mt-5 text-base font-semibold text-foreground">Puzzlecub</h3>
               <p>
@@ -458,7 +496,7 @@ export default function PrivacyPage() {
                   subject to Section 2a
                 </li>
                 <li>
-                  With Google AdMob to serve ads within Puzzlecub and, for eligible older
+                  With Google AdMob to serve ads within Puzzlecub and Chaturang and, for eligible older
                   players, Fill the Jar, subject to the app-specific limits in Section 2
                 </li>
                 <li>
@@ -523,7 +561,7 @@ export default function PrivacyPage() {
                   >
                     Google AdSense
                   </a>{" "}
-                  (advertising on neurantra.com), Google AdMob (advertising in Puzzlecub and eligible Fill the Jar sessions), and{" "}
+                  (advertising on neurantra.com), Google AdMob (advertising in Puzzlecub, Chaturang, and eligible Fill the Jar sessions), and{" "}
                   <a
                     href="https://firebase.google.com/support/privacy"
                     target="_blank"
@@ -533,7 +571,7 @@ export default function PrivacyPage() {
                     Firebase Crashlytics
                   </a>{" "}
                   (crash diagnostics in Puzzlecub), plus Firebase Authentication and Realtime
-                  Database (the optional shared coin vault)
+                  Database (the shared coin vault and Chaturang online multiplayer)
                 </li>
                 <li>
                   Apple App Store and Google Play (app distribution), governed by Apple&rsquo;s
@@ -585,8 +623,8 @@ export default function PrivacyPage() {
                 . We will respond within the period required by applicable law.
               </p>
               <p className="mt-3">
-                For Fill the Jar access, correction, or deletion requests, email{" "}
-                <a href="mailto:hello@neurantra.com?subject=Fill%20the%20Jar%20privacy%20request"
+                For Puzzlecub, Chaturang, or Fill the Jar access, correction, or deletion requests, email{" "}
+                <a href="mailto:hello@neurantra.com?subject=Neurantra%20game%20privacy%20request"
                   className="text-accent underline-offset-2 hover:underline">hello@neurantra.com</a>
                 . Tell us which game and request you are contacting us about. Do not send
                 passwords or active link codes. We may need additional information to locate
@@ -598,24 +636,27 @@ export default function PrivacyPage() {
 
             <section id="account-deletion" className="scroll-mt-24 rounded-2xl border border-line p-6">
               <h2 className="text-xl font-semibold tracking-tight text-foreground">
-                Request deletion — Fill the Jar: Shape Puzzle
+                Request deletion — Puzzlecub, Chaturang, and Fill the Jar: Shape Puzzle
               </h2>
               <p className="mt-3">
-                Neurantra LLC accepts requests to delete your Fill the Jar anonymous vault
-                account and associated server-side data by email. You can submit a request
+                Neurantra LLC accepts requests by email to delete anonymous game accounts and
+                associated server-side data for Puzzlecub, Chaturang, and Fill the Jar: Shape
+                Puzzle, including the shared coin vault and applicable online-play records. You can submit a request
                 even if you have already uninstalled the app. This is a manually handled
                 request, not an immediate deletion button.
               </p>
               <ol className="mt-4 list-decimal space-y-3 pl-6">
                 <li>
                   Email{" "}
-                  <a href="mailto:hello@neurantra.com?subject=Fill%20the%20Jar%20account%20deletion%20request"
+                  <a href="mailto:hello@neurantra.com?subject=Neurantra%20game%20account%20deletion%20request"
                     className="text-accent underline underline-offset-4">hello@neurantra.com</a>
-                  {" "}with the subject <strong>Fill the Jar account deletion request</strong>.
+                  {" "}with the subject <strong>Neurantra game account deletion request</strong>.
                 </li>
                 <li>
-                  Tell us whether you used the shared coin vault, which Neurantra games you
-                  linked, and whether you still have access to any linked device. If available,
+                  Name the game or games your request covers: Puzzlecub, Chaturang, and/or
+                  Fill the Jar. Tell us whether you used the shared coin vault or Chaturang
+                  online play, which games you linked, and whether you still have access to
+                  any linked device. If available,
                   include approximate dates and amounts of recent vault transfers to help us
                   locate the records. Do not send passwords, active linking codes, or identity
                   documents in your initial email.
@@ -634,9 +675,9 @@ export default function PrivacyPage() {
               <p className="mt-2">
                 Following verification, we delete the applicable anonymous authentication
                 identity, vault membership, related linking records, and associated personal
-                data in transfer records, except for limited records retained for the reasons
-                below. We confirm the scope with you when a vault also serves Puzzlecub,
-                Chaturang, or another linked device. Deleting one app identity does not authorize
+                data in transfer and online-play records, except for limited records retained for the reasons
+                below. We confirm the scope with you when a vault also serves another game
+                or linked device. Deleting one app identity does not authorize
                 deletion of another player&rsquo;s account or the entire shared balance.
                 If your request covers a vault you control in full, its remaining balance and
                 associated data are included; deleted coins cannot be recovered.
@@ -668,7 +709,7 @@ export default function PrivacyPage() {
                 A parent or guardian may contact the same address about a child&rsquo;s data.
                 Fill the Jar&rsquo;s protected experience does not enable the shared vault
                 or advertising. If you never used online features, there may be no vault
-                account for us to delete.
+                account for us to delete. The same request address serves all three games.
               </p>
             </section>
 
@@ -681,7 +722,7 @@ export default function PrivacyPage() {
                 statement does not apply to optional shared-vault records.
               </p>
               <p className="mt-3">
-                Fill the Jar local saves and birth-year declarations remain on the device
+                Local saves across the three games, and birth-year declarations where used, remain on the device
                 until its app data is removed. Server-side vault identities, memberships,
                 balances, and transaction records persist independently of the app installation.
                 The current testing service does not automatically purge these records on
