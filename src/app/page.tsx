@@ -1,3 +1,4 @@
+import { WEB_GAMES } from "@/lib/games";
 import Image from "next/image";
 import Link from "next/link";
 import { AdSlot } from "./_components/AdSlot";
@@ -54,35 +55,35 @@ const PRODUCTS: Product[] = [
     logo: "/planesane/planesane-logo.svg",
   },
   {
-    name: "Puzzlecub",
-    tagline: "Seven AI-driven games in one app — Math, Word, Sand, Alpha, Maze, Geo, and Stack — adapting to how you play.",
-    domain: "Games · all ages",
+    name: "PuzzleCub",
+    tagline: "Six free browser games at puzzlecub.com, plus a family of mobile apps at puzzlecub.app. Puzzles, words, geography, and strategy for curious minds.",
+    domain: "Games · web & mobile",
     status: "Live",
     url: "/puzzlecub",
     internal: true,
-    logo: "/puzzlecub/puzzlecub-logo.png",
+    logo: "/puzzlecub/icon.webp",
   },
-  {
-    name: "Fill the Jar",
-    tagline: "A little space. A perfect fit. Arrange colorful geometric pieces to fill the jar across 100 relaxing puzzles and four cheerful worlds. Coming to iOS and Android.",
-    domain: "Games · shape puzzles",
-    status: "Coming soon",
-    logo: "/fill-the-jar/icon.png",
-  },
-  {
-    name: "Chaturang",
-    tagline: "The 8th-century Indian ancestor of chess, reborn with a strong, self-play-tuned AI.",
-    domain: "Games · board & strategy",
+  ...WEB_GAMES.map((game): Product => ({
+    name: game.name,
+    tagline: game.description,
+    domain: `Games · ${game.category}`,
     status: "Live",
-    url: "/chaturang",
-    internal: true,
-    logo: "/chaturang/chaturang-logo.png",
-  },
+    statusLabel: "Play on the web",
+    url: `https://puzzlecub.com/${game.slug}`,
+    logo: game.icon,
+  })),
 ];
 
 // The three or four most recent shipping milestones. Newest first; prune the tail
 // rather than letting this grow into a changelog.
 const LATEST = [
+  {
+    when: "October 2026",
+    product: "PuzzleCub",
+    href: "/puzzlecub",
+    headline: "Play in your browser. Explore the apps.",
+    body: "Chaturang, Alphadoku, Maze Words, Slide & Sort, Mapopia, and Fill the Jar are playable on puzzlecub.com. Find the four-game PuzzleCub mobile app and standalone games at puzzlecub.app.",
+  },
   {
     when: "August 2026",
     product: "Surgery Care",
@@ -99,14 +100,7 @@ const LATEST = [
     body:
       "StaySane is the lodging half — a 0-100 risk score built from what guests actually complain about, how the location really works, and whether the rate is fair for that city. Thin evidence is withheld, not guessed. On the web now; the flight side is also a free app on iOS and Android.",
   },
-  {
-    when: "July 2026",
-    product: "Puzzlecub",
-    href: "/puzzlecub",
-    headline: "A seventh game: Stack Quest.",
-    body:
-      "Tap two numbers and the answer they make to drop a puck into the tube, and stack them faster than the beaker fills. It joins the Daily Challenge rotation alongside the other six.",
-  },
+
 ];
 
 const PRACTICES = [
@@ -118,7 +112,7 @@ const PRACTICES = [
   {
     label: "AI-driven educational games",
     body:
-      "Games where the AI is the tutor, the antagonist, and the narrator — adapting difficulty in real time and turning practice into play. Currently building reading and math fluency tools for children ages 5 through 12.",
+      "Games where the AI is the tutor, the antagonist, and the narrator — adapting difficulty in real time and turning practice into play. Explore quick math and word challenges, letter Sudoku, geography puzzles, and strategy games.",
   },
 ];
 

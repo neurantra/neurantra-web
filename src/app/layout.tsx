@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://neurantra.com";
 const TITLE = "Neurantra — Calm AI for the moments where clarity matters";
 const DESCRIPTION =
-  "Neurantra is a small product studio building domain-specific AI assistants and AI-driven games. Currently shipping IyerSpine, Surgery Care, Pawcial, PlaneSane, Puzzlecub, and Chaturang.";
+  "Neurantra is a small product studio building domain-specific AI assistants and AI-driven games. Currently shipping IyerSpine, Surgery Care, Pawcial, PlaneSane, PuzzleCub, Chaturang, Alphadoku, Maze Words, Slide & Sort, Mapopia, and Fill the Jar.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +41,12 @@ export const metadata: Metadata = {
     "flight reliability",
     "StaySane",
     "hotel scoring",
-    "Puzzlecub",
+    "PuzzleCub",
+    "Alphadoku",
+    "Maze Words",
+    "Slide & Sort",
+    "Mapopia",
+    "Fill the Jar",
     "Chaturang",
   ],
   authors: [{ name: "Neurantra" }],

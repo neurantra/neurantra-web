@@ -8,7 +8,7 @@ import { AD_SLOTS } from "@/lib/ads";
 export const metadata: Metadata = {
   title: "Chaturang — the 8th-century ancestor of chess",
   description:
-    "Chaturang is the 8th-century Indian board game that became chess — reborn on mobile with a strong, self-play-tuned AI and a Mughal-themed board. Live on iOS and Android. A Neurantra game.",
+    "Chaturang is the 8th-century Indian board game that became chess — reborn on mobile with a strong, self-play-tuned AI and a Mughal-themed board. Play on the web or download for iOS and Android. A Neurantra game.",
   alternates: { canonical: "/chaturang" },
   openGraph: {
     type: "website",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: "https://neurantra.com/chaturang",
     title: "Chaturang — the 8th-century ancestor of chess",
     description:
-      "The game chess came from, reborn with a strong, self-play-tuned AI. Live on iOS and Android.",
+      "The game chess came from, reborn with a strong, self-play-tuned AI. Play on the web or download for iOS and Android.",
     locale: "en_US",
   },
 };
@@ -65,7 +65,7 @@ const FEATURES: Feature[] = [
     eyebrow: "The loop",
     heading: "Hints when you need them, streaks to keep.",
     body:
-      "Stuck? Spend coins on a hint and the engine shows you its recommended move, highlighted on the board. Earn coins back by winning, drawing, or watching an ad. A day-streak counter and lifetime stats track every game — all of it wrapped in a Mughal-themed aesthetic with ornate piece silhouettes and the Kalam typeface. No accounts, no signup, no tracking beyond what ad serving requires.",
+      "Stuck? Spend coins on a hint and the engine shows you its recommended move, highlighted on the board. Earn coins back by winning, drawing, or watching an ad. A day-streak counter and lifetime stats track every game — all of it wrapped in a Mughal-themed aesthetic with ornate piece silhouettes and the Kalam typeface. Solo play needs no signup; optional connected features are described in our privacy policy.",
     note: "Hints · coins · day streaks · lifetime stats",
     screenshot: "/chaturang/chaturang-stats.png",
     screenshotAlt: "Chaturang statistics screen — coins, games, streaks",
@@ -91,7 +91,7 @@ export default function ChaturangPage() {
                 className="h-[72px] w-[72px] rounded-2xl"
               />
               <span className="inline-flex items-center whitespace-nowrap rounded-full border border-[#C9DED7] bg-[#E6F0EC] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#1F4C40]">
-                Live on iOS &amp; Android
+                Web, iOS &amp; Android
               </span>
             </div>
             <h1 className="text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-[60px]">
@@ -102,9 +102,12 @@ export default function ChaturangPage() {
               the earliest known form of chess. The pieces are weaker, there is
               no castling, and the King has a single once-per-game Knight leap.
               Play it against an AI tuned over hundreds of thousands of self-play
-              positions. Live now on the App Store and Google Play.
+              positions. Play in your browser at puzzlecub.com, or download from the App Store and Google Play.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <a href="https://puzzlecub.com/chaturang" target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+                Play in your browser →
+              </a>
               <a
                 href={CHATURANG_APP_STORE}
                 target="_blank"
@@ -161,12 +164,11 @@ export default function ChaturangPage() {
                 Built by Neurantra, quiet by design.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-muted">
-                Chaturang asks for nothing: no account, no signup, no tracking
-                beyond what ad serving requires. Everything — your coins, your
-                streak, your lifetime stats — lives on your device. It is a
-                single, finished game with a learned opponent, presented in a
-                Mughal-themed aesthetic of ornate piece silhouettes and the
-                Kalam typeface.
+                Play against the AI without signing up. The mobile app also
+                offers optional online play and a shared Coin Vault for eligible
+                players. Those connected features use server-side data; see our{" "}
+                <a href="/privacy" className="text-accent underline">privacy policy</a>{" "}
+                for details. Game progress and purchases remain separate across apps.
               </p>
             </div>
           </div>
@@ -248,10 +250,12 @@ export default function ChaturangPage() {
             Free, ad-supported, no account required.
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
-            Chaturang is live now on iOS and Android. Tap a store below to
-            download.
+            Play Chaturang in your browser, or download the mobile app for iOS and Android.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <a href="https://puzzlecub.com/chaturang" target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+              Play in your browser →
+            </a>
             <a
               href={CHATURANG_APP_STORE}
               target="_blank"
